@@ -19,10 +19,10 @@ class Distance:
 
     def __iadd__(self, other: "Distance | float ") -> "Distance":
         if isinstance(other, Distance):
-            self.km += + other.km
+            self.km += other.km
             return self
         if isinstance(other, (int, float)):
-            self.km += + other
+            self.km += other
             return self
 
     def __mul__(self, other: "Distance") -> "Distance":
