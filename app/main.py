@@ -14,28 +14,37 @@ class Distance:
     def __add__(self, other: Union["Distance", float, int]) -> "Distance":
         if isinstance(other, Distance):
             return Distance(km=self.km + other.km)
-        if isinstance(other, (int, float)):
+        elif isinstance(other, (int, float)):
             return Distance(km=self.km + other)
+        else:
+            return NotImplemented
 
     def __iadd__(self, other: Union["Distance", float, int]) -> "Distance":
         if isinstance(other, Distance):
             self.km += other.km
             return self
-        if isinstance(other, (int, float)):
+        elif isinstance(other, (int, float)):
             self.km += other
             return self
+        else:
+            return NotImplemented
 
-    def __mul__(self, other: Union[(int, float)]) -> "Distance":
+    def __mul__(self, other: Union[int, float]) -> "Distance":
         if isinstance(other, (int, float)):
             return Distance(
                 km=self.km * other
             )
+        else:
+            return NotImplemented
 
     def __truediv__(self, other: Union[int, float]) -> "Distance":
         if isinstance(other, (int, float)):
             if other != 0:
-                new_km = self.km / other
-                return Distance(round(new_km, 2))
+                return Distance(round((self.km / other), 2))
+            else:
+                raise ZeroDivisionError("Division by zero")
+        else:
+            return NotImplemented
 
     def __lt__(self, other: Any) -> bool:
         if isinstance(other, Distance):
